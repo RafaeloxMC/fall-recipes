@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { REGULATIONS } from "./util/types";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 export default function Home() {
 	const [status, setStatus] = useState("");
@@ -93,6 +95,11 @@ export default function Home() {
 							Vegetarian
 						</option>
 					</select>
+
+					<p className="text-sm text-neutral-400 mt-2">
+						Selected regulations: {REGULATIONS[regulations]} (id:{" "}
+						{regulations})
+					</p>
 				</div>
 
 				<button
@@ -124,8 +131,8 @@ export default function Home() {
 
 function RecipeDisplay({ content }: { content: string }) {
 	return (
-		<div className="bg-neutral-800 border border-neutral-700 rounded-lg p-6">
-			<div className="prose prose-invert max-w-none">{content}</div>
+		<div className="bg-neutral-800 border border-neutral-700 rounded-lg p-6 prose prose-invert max-w-none">
+			<ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
 		</div>
 	);
 }

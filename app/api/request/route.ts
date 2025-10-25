@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
+import { REGULATIONS } from "@/app/util/types";
+import { getGroqChatCompletion } from "@/app/util/groq";
 
 const rateLimitMap = new Map<string, number>();
 
@@ -60,9 +62,45 @@ export async function POST(request: NextRequest) {
 	}
 
 	try {
+		const body = await request.json();
+
+		if (!body.ingredients || typeof body.ingredients !== "string") {
+			return NextResponse.json(
+				{
+					error: "Invalid request",
+					message: "ingredients is required and must be a string",
+				},
+				{ status: 400 }
+			);
+		}
+
+		const validRegulations = Object.values(REGULATIONS).filter(
+			(v) => typeof v === "number"
+		);
+		if (
+			body.regulations === undefined ||
+			!validRegulations.includes(body.regulations)
+		) {
+			return NextResponse.json(
+				{
+					error: "Invalid request",
+					message: `regulations is required and must be one of: ${validRegulations.join(
+						", "
+					)}`,
+				},
+				{ status: 400 }
+			);
+		}
+
+		const { ingredients, regulations } = body as {
+			ingredients: string;
+			regulations: REGULATIONS;
+		};
+		const result = await getGroqChatCompletion(ingredients, regulations);
+
 		return NextResponse.json({
 			success: true,
-			message: "response from ai api here",
+			message: result,
 		});
 	} catch (error) {
 		console.error("API error:", error);

@@ -1,0 +1,5 @@
+export enum REGULATIONS {
+	VEGAN,
+	VEGETARIAN,
+	NO_REGULATIONS,
+}

@@ -11,6 +11,7 @@ function RecipeGenerator() {
 		REGULATIONS.NO_REGULATIONS
 	);
 	const [recipe, setRecipe] = useState<string | null>(null);
+	const [creationDate, setCreationDate] = useState<number | null>(null);
 	const [error, setError] = useState<string | null>(null);
 
 	const handleGenerateRecipe = async () => {
@@ -36,9 +37,14 @@ function RecipeGenerator() {
 				return;
 			}
 
-			if (data.success && data.message?.choices?.[0]?.message?.content) {
+			if (
+				data.success &&
+				data.message?.choices?.[0]?.message?.content &&
+				data.createdAt
+			) {
 				const recipeContent = data.message.choices[0].message.content;
 				setRecipe(recipeContent);
+				setCreationDate(data.createdAt);
 			} else {
 				setError("Invalid response format");
 			}
@@ -106,14 +112,40 @@ function RecipeGenerator() {
 
 			{recipe && (
 				<div className="w-full max-w-2xl">
-					<RecipeDisplay content={recipe} />
+					<RecipeDisplay
+						content={recipe}
+						creationDate={creationDate}
+					/>
 				</div>
 			)}
 		</div>
 	);
 }
 
-function RecipeDisplay({ content }: { content: string }) {
+function RecipeDisplay({
+	content,
+	creationDate,
+}: {
+	content: string;
+	creationDate: number | null;
+}) {
+	const handlePublish = async () => {
+		try {
+			await fetch("/api/recipes/new", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					content: content,
+					createdAt: creationDate,
+				}),
+			});
+		} catch (e) {
+			console.error("Publish failed:", e);
+		}
+	};
+
 	const handleDownload = () => {
 		try {
 			const blob = new Blob([content], {
@@ -208,7 +240,10 @@ function RecipeDisplay({ content }: { content: string }) {
 				{content}
 			</ReactMarkdown>
 			<div className="flex flex-row justify-between w-full gap-4 mt-4">
-				<button className="text-center w-full h-full px-6 py-4 bg-(--primary-border) rounded-xl hover:opacity-80 transition-opacity">
+				<button
+					className="text-center w-full h-full px-6 py-4 bg-(--primary-border) rounded-xl hover:opacity-80 transition-opacity"
+					onClick={handlePublish}
+				>
 					Publish
 				</button>
 				<button

@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { REGULATIONS } from "@/app/util/types";
 import { getGroqChatCompletion } from "@/app/util/groq";
+import { recipeCache } from "@/app/util/recipeCache";
+import { IRecipe } from "@/app/db/schemas/Recipe";
 
 const rateLimitMap = new Map<string, number>();
 
@@ -97,10 +99,26 @@ export async function POST(request: NextRequest) {
 			regulations: REGULATIONS;
 		};
 		const result = await getGroqChatCompletion(ingredients, regulations);
-
+		const date = Date.now();
+		if (result && result.choices?.[0]?.message?.content) {
+			const recipeContent = result.choices[0].message.content;
+			recipeCache.push({
+				name: recipeContent.split("\n")[0],
+				content: recipeContent,
+				createdAt: date,
+			});
+			console.log("PUSHED TO RECIPE CACHE!");
+			console.log(recipeCache);
+		} else {
+			return NextResponse.json(
+				{ message: "Bad response format" },
+				{ status: 500 }
+			);
+		}
 		return NextResponse.json({
 			success: true,
 			message: result,
+			createdAt: date,
 		});
 	} catch (error) {
 		console.error("API error:", error);

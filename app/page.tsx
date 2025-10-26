@@ -1,4 +1,5 @@
-import RecipeCard from "./components/recipe-card";
+import { IRecipeCard } from "./components/recipe-card";
+import RecipeCardContainer from "./components/recipe-card-container";
 import RecipeGenerator from "./components/recipe-generator";
 
 export default function Home() {
@@ -23,7 +24,15 @@ export default function Home() {
 			</p>
 
 			<div className="w-16 bg-transparent h-8" />
-			<RecipeCard />
+			<RecipeCardContainer
+				cards={[
+					{
+						name: "Some Name",
+						content:
+							"This is some example description for this really nice recipe!",
+					} as IRecipeCard,
+				]}
+			/>
 			<RecipeGenerator />
 		</div>
 	);

@@ -1,8 +1,13 @@
 import Image from "next/image";
 
-function RecipeCard() {
+export interface IRecipeCard {
+	name: string;
+	content: string;
+}
+
+function RecipeCard({ name, content }: IRecipeCard) {
 	return (
-		<div className="max-w-72 w-full h-96 rounded-xl overflow-hidden">
+		<div className="w-72 h-96 rounded-xl overflow-hidden shrink-0">
 			<div className="relative w-full h-48">
 				<Image
 					className="object-cover"
@@ -12,10 +17,12 @@ function RecipeCard() {
 				/>
 			</div>
 			<div className="p-4 bg-(--primary) rounded h-full">
-				<h1 className="text-2xl font-extrabold">Some nice recipe!</h1>
+				<h1 className="text-2xl font-extrabold">
+					{name ?? "Some nice recipe!"}
+				</h1>
 				<p className="text-sm italic">
-					This is a very nice recipe! You should really make this
-					yourself!
+					{content ??
+						"This is a very nice recipe! You should really make this yourself!"}
 				</p>
 			</div>
 		</div>

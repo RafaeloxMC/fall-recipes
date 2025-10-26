@@ -69,7 +69,7 @@ export default function Home() {
 						value={ingredients}
 						onChange={(e) => setIngredients(e.target.value)}
 						placeholder="e.g., pumpkin, cinnamon, apple"
-						className="px-4 py-2 bg-neutral-800 rounded-lg border border-neutral-700"
+						className="px-4 py-2 bg-(--primary) rounded-lg border border-(--primary-border)"
 					/>
 				</div>
 
@@ -85,7 +85,7 @@ export default function Home() {
 								Number(e.target.value) as REGULATIONS
 							)
 						}
-						className="px-4 py-2 bg-neutral-800 rounded-lg border border-neutral-700"
+						className="px-4 py-2 bg-(--primary) rounded-lg border border-(--primary-border)"
 					>
 						<option value={REGULATIONS.NO_REGULATIONS}>
 							No Restrictions
@@ -95,24 +95,15 @@ export default function Home() {
 							Vegetarian
 						</option>
 					</select>
-
-					<p className="text-sm text-neutral-400 mt-2">
-						Selected regulations: {REGULATIONS[regulations]} (id:{" "}
-						{regulations})
-					</p>
 				</div>
 
 				<button
 					onClick={handleGenerateRecipe}
-					className="px-6 py-4 bg-neutral-700 rounded-xl hover:bg-neutral-600 transition-colors"
+					className="px-6 py-4 bg-(--primary) border border-(--primary-border) rounded-xl hover:bg-(--primary-border) transition-colors"
 				>
 					Generate Recipe
 				</button>
 			</div>
-
-			<p className="text-sm text-neutral-400">
-				Status: {status || "None"}
-			</p>
 
 			{error && (
 				<div className="w-full max-w-2xl p-4 bg-red-900/20 border border-red-700 rounded-lg">
@@ -131,7 +122,7 @@ export default function Home() {
 
 function RecipeDisplay({ content }: { content: string }) {
 	return (
-		<div className="bg-neutral-800 border border-neutral-700 rounded-lg p-6 prose prose-invert max-w-none">
+		<div className="bg-(--primary)  border border-(--primary-border)  rounded-lg p-6 prose prose-invert max-w-none">
 			<ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
 		</div>
 	);

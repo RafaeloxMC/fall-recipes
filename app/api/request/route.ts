@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { REGULATIONS } from "@/app/util/types";
 import { getGroqChatCompletion } from "@/app/util/groq";
 import { recipeCache } from "@/app/util/recipeCache";
-import { IRecipe } from "@/app/db/schemas/Recipe";
 
 const rateLimitMap = new Map<string, number>();
 

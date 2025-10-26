@@ -114,6 +114,24 @@ function RecipeGenerator() {
 }
 
 function RecipeDisplay({ content }: { content: string }) {
+	const handleDownload = () => {
+		try {
+			const blob = new Blob([content], {
+				type: "text/markdown;charset=utf-8",
+			});
+			const url = URL.createObjectURL(blob);
+			const a = document.createElement("a");
+			a.href = url;
+			a.download = `recipe-${new Date().toISOString()}.md`;
+			document.body.appendChild(a);
+			a.click();
+			a.remove();
+			URL.revokeObjectURL(url);
+		} catch (e) {
+			console.error("Download failed:", e);
+		}
+	};
+
 	return (
 		<div className="bg-(--primary)  border border-(--primary-border)  rounded-lg p-6 prose prose-invert max-w-none">
 			<ReactMarkdown
@@ -189,6 +207,17 @@ function RecipeDisplay({ content }: { content: string }) {
 			>
 				{content}
 			</ReactMarkdown>
+			<div className="flex flex-row justify-between w-full gap-4 mt-4">
+				<button className="text-center w-full h-full px-6 py-4 bg-(--primary-border) rounded-xl hover:opacity-80 transition-opacity">
+					Publish
+				</button>
+				<button
+					className="text-center w-full h-full px-6 py-4 bg-(--primary-border) rounded-xl hover:opacity-80 transition-opacity"
+					onClick={handleDownload}
+				>
+					Download
+				</button>
+			</div>
 		</div>
 	);
 }

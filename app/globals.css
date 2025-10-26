@@ -2,7 +2,7 @@
 
 :root {
 	--background: #e7cba0;
-	--foreground: #3d362a;
+	--foreground: #5a503e;
 	--primary: #b49b75;
 	--primary-border: #816e52;
 }
@@ -27,43 +27,4 @@ body {
 	background: var(--background);
 	color: var(--foreground);
 	font-family: Arial, Helvetica, sans-serif;
-}
-
-h1 {
-	font-size: var(--text-3xl);
-	line-height: var(--tw-leading, var(--text-3xl--line-height));
-	font-weight: bolder;
-}
-
-h2 {
-	font-size: var(--text-2xl);
-	line-height: var(--tw-leading, var(--text-2xl--line-height));
-	margin-top: calc(var(--spacing) * 6);
-	font-weight: bold;
-}
-
-h3 {
-	font-size: var(--text-xl);
-	line-height: var(--tw-leading, var(--text-xl--line-height));
-	margin-top: calc(var(--spacing) * 4);
-	font-weight: bold;
-}
-
-ul {
-	list-style-type: disc;
-	padding-left: calc(var(--spacing) * 5);
-	margin-top: calc(var(--spacing) * 2);
-	margin-bottom: calc(var(--spacing) * 4);
-}
-
-ol {
-	list-style-type: decimal;
-	padding-left: calc(var(--spacing) * 5);
-	margin-top: calc(var(--spacing) * 2);
-	margin-bottom: calc(var(--spacing) * 4);
-}
-
-li {
-	margin-top: calc(var(--spacing) * 1);
-	margin-bottom: calc(var(--spacing) * 1);
 }

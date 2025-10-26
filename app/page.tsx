@@ -1,9 +1,12 @@
+import RecipeCard from "./components/recipe-card";
 import RecipeGenerator from "./components/recipe-generator";
 
 export default function Home() {
 	return (
 		<div className="flex flex-col justify-center items-center w-full p-8">
-			<h1 className="text-4xl font-extrabold">Fall recipe generator!</h1>
+			<h1 className="text-[100px] font-extrabold">
+				Fall recipe generator!
+			</h1>
 			<p className="italic mt-4">
 				The fall recipe generator is your go-to website for cozy,
 				seasonal recipes — think warm spices, roasted vegetables, and
@@ -18,6 +21,9 @@ export default function Home() {
 				Try it out below and list ingredients or instruction to suit
 				your taste.
 			</p>
+
+			<div className="w-16 bg-transparent h-8" />
+			<RecipeCard />
 			<RecipeGenerator />
 		</div>
 	);

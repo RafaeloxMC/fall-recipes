@@ -15,12 +15,16 @@ function RecipeCard({ name, content, _id }: IRecipeCard) {
 			className="w-72 h-96 rounded-xl overflow-hidden shrink-0"
 		>
 			<div className="relative w-full h-48">
-				<Image
-					className="object-cover"
-					src="/recipe.jpg"
-					alt={"Recipe Picture"}
-					fill
-				/>
+				{_id ? (
+					<Image
+						className="object-cover"
+						src="/recipe.jpg"
+						alt={"Recipe Picture"}
+						fill
+					/>
+				) : (
+					<div></div>
+				)}
 			</div>
 			<div className="p-4 bg-(--primary) rounded h-full">
 				<h1 className="text-2xl font-extrabold">

@@ -136,7 +136,7 @@ function Page({ params }: PageProps) {
 					<MarkdownDisplay content={recipe.content} />
 				</div>
 
-				<div className="items-center justify-center bg-(--primary) border border-(--primary-border) rounded-lg p-8 mb-6 shadow flex flex-col gap-4">
+				<div className="items-center justify-center bg-(--primary) border border-(--primary-border) rounded-lg p-8 mb-6 shadow flex flex-col gap-4 print:hidden">
 					<h1 className="font-bold text-3xl">Cooked this recipe?</h1>
 					<p className="italic">
 						Feel free to upload a picture of your dish!

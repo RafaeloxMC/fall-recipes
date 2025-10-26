@@ -3,7 +3,7 @@ import React from "react";
 
 function Footer() {
 	return (
-		<div className="flex flex-col w-full items-center justify-center gap-4">
+		<div className="flex flex-col w-full items-center justify-center gap-4 print:hidden">
 			<div className="flex flex-row justify-center items-center w-full gap-8">
 				<div className="max-w-48">
 					<p className="text-xl font-bold">Fall Recipes</p>{" "}

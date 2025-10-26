@@ -66,7 +66,7 @@ function RecipeGenerator() {
 						value={ingredients}
 						onChange={(e) => setIngredients(e.target.value)}
 						placeholder="e.g., pumpkin, cinnamon, apple"
-						className="px-4 py-2 bg-(--primary) rounded-lg border border-(--primary-border)"
+						className="px-4 py-2 bg-(--primary) rounded-lg border border-(--primary-border) shadow"
 					/>
 				</div>
 
@@ -82,7 +82,7 @@ function RecipeGenerator() {
 								Number(e.target.value) as REGULATIONS
 							)
 						}
-						className="px-4 py-2 bg-(--primary) rounded-lg border border-(--primary-border)"
+						className="px-4 py-2 bg-(--primary) rounded-lg border border-(--primary-border) shadow"
 					>
 						<option value={REGULATIONS.NO_REGULATIONS}>
 							No Restrictions
@@ -96,7 +96,7 @@ function RecipeGenerator() {
 
 				<button
 					onClick={handleGenerateRecipe}
-					className="px-6 py-4 bg-(--primary) border border-(--primary-border) rounded-xl hover:bg-(--primary-border) transition-colors"
+					className="px-6 py-4 bg-(--primary) border border-(--primary-border) rounded-xl hover:bg-(--primary-border) transition-colors shadow"
 				>
 					Generate Recipe
 				</button>

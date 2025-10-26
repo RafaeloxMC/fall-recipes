@@ -31,7 +31,7 @@ function BrowsePage() {
 				}}
 			/>
 
-			<div className="flex flex-wrap gap-16 items-center justify-center">
+			<div className="flex flex-wrap gap-8 items-center justify-center">
 				{recipes.map((card, index) => {
 					if (
 						card.content

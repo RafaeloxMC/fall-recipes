@@ -15,7 +15,7 @@ function RecipeCard({ name, content, _id }: IRecipeCard) {
 	return (
 		<Link
 			href={"/recipes/" + _id.toString()}
-			className="w-72 h-96 rounded-xl overflow-hidden shrink-0"
+			className="w-72 h-96 rounded-xl overflow-hidden shrink-0 hover:scale-100 scale-95 transition-transform shadow"
 		>
 			<div className="relative w-full h-48 bg-(--primary-border) flex items-center justify-center">
 				{_id && !imageError ? (

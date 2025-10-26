@@ -3,6 +3,7 @@ import MarkdownDisplay from "@/app/components/md-display";
 import { IRecipe } from "@/app/db/schemas/Recipe";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 interface PageProps {
 	params: Promise<{
@@ -114,19 +115,28 @@ function Page({ params }: PageProps) {
 					</p>
 				</div>
 
-				<div className="bg-(--primary) border border-(--primary-border) rounded-lg p-8 mb-6">
+				<div className="relative w-full h-64 mb-8">
+					<Image
+						src={"/images/" + id + ".jpg"}
+						alt="Image!"
+						className="object-cover rounded-2xl shadow"
+						fill
+					/>
+				</div>
+
+				<div className="bg-(--primary) border border-(--primary-border) rounded-lg p-8 mb-6 shadow">
 					<MarkdownDisplay content={recipe.content} />
 				</div>
 
 				<div className="flex flex-row gap-4 print:hidden">
 					<button
-						className="flex-1 px-6 py-4 bg-(--primary) border border-(--primary-border) rounded-xl hover:bg-(--primary-border) transition-colors font-semibold"
+						className="flex-1 px-6 py-4 bg-(--primary) border border-(--primary-border) rounded-xl hover:bg-(--primary-border) transition-colors font-semibold shadow"
 						onClick={handleDownload}
 					>
 						Download Recipe
 					</button>
 					<button
-						className="flex-1 px-6 py-4 bg-(--primary) border border-(--primary-border) rounded-xl hover:bg-(--primary-border) transition-colors font-semibold"
+						className="flex-1 px-6 py-4 bg-(--primary) border border-(--primary-border) rounded-xl hover:bg-(--primary-border) transition-colors font-semibold shadow"
 						onClick={() => window.print()}
 					>
 						Print Recipe

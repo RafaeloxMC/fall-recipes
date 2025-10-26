@@ -96,7 +96,7 @@ function Page({ params }: PageProps) {
 						className="inline-flex items-center gap-2 text-sm hover:opacity-70 transition-opacity mb-4 print:hidden"
 					>
 						<span>←</span>
-						<span>Back to Generator</span>
+						<span>Back to Home</span>
 					</Link>
 					<h1 className="text-5xl font-extrabold mb-2">
 						Fall Recipe

@@ -47,7 +47,7 @@ function RecipeGenerator() {
 		}
 	};
 	return (
-		<div className="p-4 flex flex-col justify-center items-center gap-4">
+		<div className="p-4 flex flex-col justify-center items-center gap-4 w-full">
 			<h1 className="text-4xl font-extrabold">Generate your recipe!</h1>
 
 			<div className="w-full max-w-md flex flex-col gap-4">

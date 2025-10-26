@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { REGULATIONS } from "../util/types";
 import MarkdownDisplay from "./md-display";
+import { useRouter } from "next/navigation";
 
 function RecipeGenerator() {
 	const [ingredients, setIngredients] = useState("");
@@ -127,9 +128,10 @@ function RecipeDisplay({
 	content: string;
 	creationDate: number | null;
 }) {
+	const router = useRouter();
 	const handlePublish = async () => {
 		try {
-			await fetch("/api/recipes/new", {
+			const res = await fetch("/api/recipes/new", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -139,6 +141,10 @@ function RecipeDisplay({
 					createdAt: creationDate,
 				}),
 			});
+			if (res.status == 201) {
+				const { message } = await res.json();
+				router.push("recipes/" + message);
+			}
 		} catch (e) {
 			console.error("Publish failed:", e);
 		}

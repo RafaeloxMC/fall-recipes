@@ -16,6 +16,7 @@ function Page({ params }: PageProps) {
 	const [recipe, setRecipe] = useState<IRecipe | null>(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
+	const [imageError, setImageError] = useState(false);
 
 	useEffect(() => {
 		let mounted = true;
@@ -116,12 +117,19 @@ function Page({ params }: PageProps) {
 				</div>
 
 				<div className="relative w-full h-64 mb-8">
-					<Image
-						src={"/images/" + id + ".jpg"}
-						alt="Image!"
-						className="object-cover rounded-2xl shadow"
-						fill
-					/>
+					{!imageError ? (
+						<Image
+							src={"/images/" + id + ".jpg"}
+							alt="Image!"
+							className="object-cover rounded-2xl shadow"
+							fill
+							onError={() => setImageError(true)}
+						/>
+					) : (
+						<div className="flex flex-col items-center justify-center text-8xl text-(--primary-border) bg-(--primary) rounded-xl border border-(--primary-border) h-full">
+							No image.
+						</div>
+					)}
 				</div>
 
 				<div className="bg-(--primary) border border-(--primary-border) rounded-lg p-8 mb-6 shadow">

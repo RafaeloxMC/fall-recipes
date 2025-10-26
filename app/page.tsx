@@ -1,8 +1,23 @@
+"use client";
+import { useEffect, useState } from "react";
 import { IRecipeCard } from "./components/recipe-card";
 import RecipeCardContainer from "./components/recipe-card-container";
 import RecipeGenerator from "./components/recipe-generator";
 
 export default function Home() {
+	const [recipes, setRecipes] = useState<IRecipeCard[]>([]);
+
+	useEffect(() => {
+		const fetchRecipes = async () => {
+			const res = await fetch("/api/recipes/random");
+			const body = await res.json();
+			console.log(body);
+			setRecipes(body.recipes);
+		};
+
+		fetchRecipes();
+	}, []);
+
 	return (
 		<div className="flex flex-col justify-center items-center w-full p-8">
 			<h1 className="text-[100px] font-extrabold">
@@ -24,15 +39,7 @@ export default function Home() {
 			</p>
 
 			<div className="w-16 bg-transparent h-8" />
-			<RecipeCardContainer
-				cards={[
-					{
-						name: "Some Name",
-						content:
-							"This is some example description for this really nice recipe!",
-					} as IRecipeCard,
-				]}
-			/>
+			<RecipeCardContainer cards={recipes} />
 			<RecipeGenerator />
 		</div>
 	);

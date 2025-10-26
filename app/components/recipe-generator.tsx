@@ -152,7 +152,10 @@ function RecipeDisplay({
 			const url = URL.createObjectURL(blob);
 			const a = document.createElement("a");
 			a.href = url;
-			a.download = `recipe-${new Date().toISOString()}.md`;
+			const timestamp = creationDate
+				? new Date(creationDate).toISOString()
+				: Date.now();
+			a.download = `recipe-${timestamp}.md`;
 			document.body.appendChild(a);
 			a.click();
 			a.remove();

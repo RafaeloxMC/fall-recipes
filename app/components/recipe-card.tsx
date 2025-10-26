@@ -1,13 +1,19 @@
+import { Types } from "mongoose";
 import Image from "next/image";
+import Link from "next/link";
 
 export interface IRecipeCard {
 	name: string;
 	content: string;
+	_id: Types.ObjectId;
 }
 
-function RecipeCard({ name, content }: IRecipeCard) {
+function RecipeCard({ name, content, _id }: IRecipeCard) {
 	return (
-		<div className="w-72 h-96 rounded-xl overflow-hidden shrink-0">
+		<Link
+			href={"/recipes/" + _id.toString()}
+			className="w-72 h-96 rounded-xl overflow-hidden shrink-0"
+		>
 			<div className="relative w-full h-48">
 				<Image
 					className="object-cover"
@@ -25,7 +31,7 @@ function RecipeCard({ name, content }: IRecipeCard) {
 						"This is a very nice recipe! You should really make this yourself!"}
 				</p>
 			</div>
-		</div>
+		</Link>
 	);
 }
 

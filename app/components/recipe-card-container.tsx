@@ -1,3 +1,4 @@
+import { Types } from "mongoose";
 import RecipeCard, { IRecipeCard } from "./recipe-card";
 
 interface RecipeCardContainerProps {
@@ -5,11 +6,18 @@ interface RecipeCardContainerProps {
 }
 
 function RecipeCardContainer({ cards }: RecipeCardContainerProps) {
-	while (cards.length < 5) {
-		cards.push(cards.at(0) ?? { name: "N/A", content: "N/A" });
+	const filledCards = [...cards];
+	const placeholder = {
+		name: "N/A",
+		content: "N/A",
+		_id: new Types.ObjectId("000000000000000000000000"),
+	};
+
+	while (filledCards.length < 5) {
+		filledCards.push(filledCards.at(0) ?? placeholder);
 	}
 
-	const duplicatedCards = [...cards, ...cards, ...cards];
+	const duplicatedCards = [...filledCards, ...filledCards, ...filledCards];
 
 	return (
 		<div className="relative overflow-hidden w-full">
@@ -17,8 +25,15 @@ function RecipeCardContainer({ cards }: RecipeCardContainerProps) {
 				{duplicatedCards.map((card, index) => {
 					return (
 						<RecipeCard
-							name={card.name}
-							content={card.content}
+							name={card.name.replace("# ", "")}
+							content={(() => {
+								const lines = (card.content ?? "b\na").split(
+									"\n"
+								);
+								const line = lines[1] ?? lines[0] ?? "";
+								return line.replace(/\*/g, "");
+							})()}
+							_id={card._id}
 							key={`${card.name}-${index}`}
 						/>
 					);

@@ -136,6 +136,19 @@ function Page({ params }: PageProps) {
 					<MarkdownDisplay content={recipe.content} />
 				</div>
 
+				<div className="items-center justify-center bg-(--primary) border border-(--primary-border) rounded-lg p-8 mb-6 shadow flex flex-col gap-4">
+					<h1 className="font-bold text-3xl">Cooked this recipe?</h1>
+					<p className="italic">
+						Feel free to upload a picture of your dish!
+					</p>
+					<p className="italic">
+						This feature is disabled for security reasons!
+					</p>
+					<button className="w-full px-6 py-4 bg-(--primary-border) rounded-lg shadow hover:opacity-80 transition-opacity">
+						Upload
+					</button>
+				</div>
+
 				<div className="flex flex-row gap-4 print:hidden">
 					<button
 						className="flex-1 px-6 py-4 bg-(--primary) border border-(--primary-border) rounded-xl hover:bg-(--primary-border) transition-colors font-semibold shadow"
